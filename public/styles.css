@@ -1,0 +1,62 @@
+/* Color palette
+
+Ice Cold: #a0d2eb
+Freeze Purple: #e5eaf5
+Medium Purple: #d0bdf4
+Purple Pain: #8458B3
+Heavy Purple: #494D5F
+Werid: #a28089
+
+*/
+
+body {
+  font-family: Century Gothic;
+  color: whitesmoke;
+  background-color: #292d3e;
+}
+
+h1 {
+  font-weight: normal;
+}
+
+.flex-main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.list {
+  display: block;
+}
+.list-el {
+  cursor: pointer;
+  display: block;
+  padding: 10px;
+  color: #494d5f;
+  text-decoration: none;
+  text-align: center;
+  background-color: #a0d2eb;
+  transition: linear 0.2s;
+  border-radius: 2px;
+  box-shadow: #ffffff5d 0 0 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: Arial;
+}
+.list-el:hover {
+  background: #89b8cf;
+}
+.list-el:active {
+  background-color: radial-gradient(
+    circle,
+    #89b8cf 30%,
+    transparent,
+    #ffffff5d 35%
+  );
+}
+
+.col3 {
+  margin: 10px;
+  width: 25%;
+}
