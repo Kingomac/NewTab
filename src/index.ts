@@ -6,20 +6,34 @@ import PageList from "./customElements/pageList";
 export const app = new AppDatabase();
 
 defineCustomElements();
-const pageCreator = new PageCreator();
 const pageList = new PageList();
 
-export async function CreatePage() {
+export async function CreatePage(pageCreator: PageCreator) {
   console.log("adding");
   await app.pages.add({
-    title: pageCreator.pTitle.textContent,
-    bgColor: pageCreator.pBgColor.textContent,
-    bgColorActive: pageCreator.pBgColorActive.textContent,
-    bgColorHover: pageCreator.pBgColorHover.textContent,
-    textColor: pageCreator.pTextColor.textContent,
-    textColorActive: pageCreator.pTextColorActive.textContent,
-    textColoHover: pageCreator.pTextColorHover.textContent,
+    title: pageCreator.pTitle.value,
+    bgColor: pageCreator.pBgColor.picker.getSelectedColor().toHEXA().toString(),
+    bgColorActive: pageCreator.pBgColorActive.picker
+      .getSelectedColor()
+      .toHEXA()
+      .toString(),
+    bgColorHover: pageCreator.pBgColorHover.picker
+      .getSelectedColor()
+      .toHEXA()
+      .toString(),
+    textColor: pageCreator.pTextColor.picker
+      .getSelectedColor()
+      .toHEXA()
+      .toString(),
+    textColorActive: pageCreator.pTextColorActive.picker
+      .getSelectedColor()
+      .toHEXA()
+      .toString(),
+    textColorHover: pageCreator.pTextColorHover.picker
+      .getSelectedColor()
+      .toHEXA()
+      .toString(),
     position: pageCreator.pPosition.valueAsNumber,
-    url: pageCreator.pUrl.textContent,
+    url: pageCreator.pUrl.value,
   });
 }

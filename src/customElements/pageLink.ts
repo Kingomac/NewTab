@@ -17,7 +17,7 @@ class PageLink extends HTMLElement {
       cursor: pointer;
       display: block;
       padding: 10px;
-      color: #494d5f;
+      color: ${this.getAttribute("txt") || "grey"};
       text-decoration: none;
       text-align: center;
       background-color: ${this.getAttribute("bg") || "#a0d2eb"};
@@ -33,9 +33,11 @@ class PageLink extends HTMLElement {
     }
     .list-el:hover {
       background: ${this.getAttribute("bgh") || "#89b8cf"};
+      color: ${this.getAttribute("txth") || "white"};
     }
     .list-el:active {
-      background-color: white;
+      background-color: ${this.getAttribute("bga") || "white"};
+      color: ${this.getAttribute("txta") || "whitesmoke"};
     }</style>
     `;
     this.shadow.append(link);

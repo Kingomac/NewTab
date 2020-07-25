@@ -7,7 +7,7 @@ interface IPage {
   bgColorHover: string;
   bgColorActive: string;
   textColor: string;
-  textColoHover: string;
+  textColorHover: string;
   textColorActive: string;
 }
 

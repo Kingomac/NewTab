@@ -1,20 +1,21 @@
 import { app, CreatePage } from "../";
+import ColorPicker from "./colorPicker";
 class PageCreator extends HTMLElement {
   private pDivTitle: HTMLHeadingElement;
   pTitle: HTMLInputElement;
   pUrl: HTMLInputElement;
   pPosition: HTMLInputElement;
-  pBgColor: HTMLInputElement;
+  pBgColor: ColorPicker;
   private pBgColorText: HTMLSpanElement;
-  pTextColor: HTMLInputElement;
+  pTextColor: ColorPicker;
   private pTextColorText: HTMLSpanElement;
-  pBgColorHover: HTMLInputElement;
+  pBgColorHover: ColorPicker;
   private pBgColorHoverText: HTMLSpanElement;
-  pTextColorHover: HTMLInputElement;
+  pTextColorHover: ColorPicker;
   private pTextColorHoverText: HTMLSpanElement;
-  pBgColorActive: HTMLInputElement;
+  pBgColorActive: ColorPicker;
   private pBgColorActiveText: HTMLSpanElement;
-  pTextColorActive: HTMLInputElement;
+  pTextColorActive: ColorPicker;
   private pTextColorActiveText: HTMLSpanElement;
   pBgDiv: HTMLDivElement;
   private pTextDiv: HTMLDivElement;
@@ -27,6 +28,7 @@ class PageCreator extends HTMLElement {
     this.shadow = this.attachShadow({ mode: "open" });
 
     this.pDiv = document.createElement("div");
+    this.pDiv.className = "creator-div";
 
     this.pDivTitle = document.createElement("h1");
     this.pDivTitle.innerText = "Añadir páginas";
@@ -49,20 +51,18 @@ class PageCreator extends HTMLElement {
 
     this.pBgColorText = document.createElement("span");
     this.pBgColorText.innerText = "Bg: ";
-    this.pBgColor = document.createElement("input");
-    this.pBgColor.type = "color";
+    this.pBgColor = new ColorPicker();
 
     this.pBgColorHoverText = document.createElement("span");
     this.pBgColorHoverText.innerText = "Bg hover: ";
-    this.pBgColorHover = document.createElement("input");
-    this.pBgColorHover.type = "color";
+    this.pBgColorHover = new ColorPicker();
 
     this.pBgColorActiveText = document.createElement("span");
     this.pBgColorActiveText.innerText = "Bg active: ";
-    this.pBgColorActive = document.createElement("input");
-    this.pBgColorActive.type = "color";
+    this.pBgColorActive = new ColorPicker();
 
     this.pBgDiv = document.createElement("div");
+    this.pBgDiv.className = "color-div";
     this.pBgDiv.append(
       this.pBgColorText,
       this.pBgColor,
@@ -75,20 +75,18 @@ class PageCreator extends HTMLElement {
 
     this.pTextColorText = document.createElement("span");
     this.pTextColorText.innerText = "Text: ";
-    this.pTextColor = document.createElement("input");
-    this.pTextColor.type = "color";
+    this.pTextColor = new ColorPicker();
 
     this.pTextColorHoverText = document.createElement("span");
     this.pTextColorHoverText.innerText = "Text: ";
-    this.pTextColorHover = document.createElement("input");
-    this.pTextColorHover.type = "color";
+    this.pTextColorHover = new ColorPicker();
 
     this.pTextColorActiveText = document.createElement("span");
     this.pTextColorActiveText.innerText = "Text: ";
-    this.pTextColorActive = document.createElement("input");
-    this.pTextColorActive.type = "color";
+    this.pTextColorActive = new ColorPicker();
 
     this.pTextDiv = document.createElement("div");
+    this.pTextDiv.className = "color-div";
     this.pTextDiv.append(
       this.pTextColorText,
       this.pTextColor,
@@ -100,12 +98,19 @@ class PageCreator extends HTMLElement {
     this.pTextDiv.style.width = "100%";
 
     this.pSubmit = document.createElement("button");
+    this.pSubmit.className = "btn-submit";
     this.pSubmit.innerText = "Añadir";
-    this.pSubmit.addEventListener("click", CreatePage);
+    this.pSubmit.addEventListener("click", () => {
+      CreatePage(this);
+    });
   }
   connectedCallback() {
     this.shadow.innerHTML = `
     <style>
+    .color-div {
+      display: flex;
+      flex-direction: row;
+    }
     h1 {
       width:100%;
       text-align:center;
@@ -124,8 +129,15 @@ class PageCreator extends HTMLElement {
     input:focus {
       border: solid 2px #82aaff;
     }
+    .pcr-button {
+      width: 40px;
+      height: 20px;
+      margin: 5px;
+      border: solid white 1px;
+      background-color: #42445A;
+    }
     
-    button {
+    .btn-submit {
       width: 100%;
       margin-top: 4px;
       padding: 5px;
@@ -141,11 +153,11 @@ class PageCreator extends HTMLElement {
       transition: ease-in-out 0.2s;
     }
     
-    button:hover {
+    .btn-submit:hover {
       background-color: #959dcb;
     }
     
-    button:active {
+    .btn-submit:active {
       background-color: #9ab8f7;
     }
     h1 {
@@ -169,7 +181,6 @@ class PageCreator extends HTMLElement {
     this.pDiv.style.borderRadius = "4px";
     this.pDiv.style.textAlign = "center";
     this.shadow.append(this.pDiv);
-    console.log(this.pTitle);
   }
 }
 

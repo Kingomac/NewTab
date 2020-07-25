@@ -2,6 +2,7 @@ import PageLink from "./customElements/pageLink";
 import PageCreator from "./customElements/pageCreator";
 import PageList from "./customElements/pageList";
 import PageLinkContextMenu from "./customElements/pageLinkContextMenu";
+import ColorPicker from "./customElements/colorPicker";
 
 export default () => {
   const elements = [
@@ -20,6 +21,10 @@ export default () => {
     {
       tag: "page-link-context-menu",
       el: PageLinkContextMenu,
+    },
+    {
+      tag: "color-picker",
+      el: ColorPicker,
     },
   ];
 
