@@ -1,18 +1,7 @@
-/* Color palette
-
-Ice Cold: #a0d2eb
-Freeze Purple: #e5eaf5
-Medium Purple: #d0bdf4
-Purple Pain: #8458B3
-Heavy Purple: #494D5F
-Werid: #a28089
-
-*/
-
 body {
   font-family: Century Gothic;
   color: whitesmoke;
-  background-color: #292d3e;
+  background-color: #000b1e;
 }
 
 h1 {
@@ -32,7 +21,7 @@ h1 {
   cursor: pointer;
   display: block;
   padding: 10px;
-  color: #494d5f;
+  color: #0abdc6;
   text-decoration: none;
   text-align: center;
   background-color: #a0d2eb;

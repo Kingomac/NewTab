@@ -1,5 +1,6 @@
-const {exec} = require('child_process')
-const fs = require('fs/promises')
+import {exec} from 'child_process'
+import fs from 'fs/promises'
+import {minifyCss} from '../modules/uglifycss'
 
 console.log("******** Building ********")
 
@@ -32,6 +33,6 @@ fs.readFile("./public/index.html").then((htmlfile) => {
   fs.writeFile('./dist/index.html', html).then(() => console.log(' + HTML template --> OK'));
 })
 fs.readFile("./public/styles.css").then((cssfile) => {
-  const css =  uglifycss.processString(cssfile.toString('utf-8'))
+  const css =  minifyCss(cssfile.toString('utf-8'))
   fs.writeFile('./dist/styles.css', css).then(() => console.log(" + CSS file --> OK"));
 });

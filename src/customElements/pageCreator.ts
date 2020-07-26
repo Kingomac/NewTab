@@ -1,5 +1,7 @@
 import { app, CreatePage } from "../";
 import ColorPicker from "./colorPicker";
+import { minifyCss } from "../../modules/uglifycss";
+
 class PageCreator extends HTMLElement {
   private pDivTitle: HTMLHeadingElement;
   pTitle: HTMLInputElement;
@@ -23,6 +25,7 @@ class PageCreator extends HTMLElement {
   pSubmitAction: () => void;
   private pDiv: HTMLDivElement;
   shadow: ShadowRoot;
+
   constructor() {
     super();
     this.shadow = this.attachShadow({ mode: "open" });
@@ -105,67 +108,7 @@ class PageCreator extends HTMLElement {
     });
   }
   connectedCallback() {
-    this.shadow.innerHTML = `
-    <style>
-    .color-div {
-      display: flex;
-      flex-direction: row;
-    }
-    h1 {
-      width:100%;
-      text-align:center;
-    }
-    input {
-      margin: 2px;
-      font-size: 14px;
-      font-family: Century Gothic;
-      padding: 5px;
-      border: solid 2px #292d3e;
-      border-radius: 4px;
-      color: #292d3e;
-      transition: ease-in-out 0.2s;
-    }
-    
-    input:focus {
-      border: solid 2px #82aaff;
-    }
-    .pcr-button {
-      width: 40px;
-      height: 20px;
-      margin: 5px;
-      border: solid white 1px;
-      background-color: #42445A;
-    }
-    
-    .btn-submit {
-      width: 100%;
-      margin-top: 4px;
-      padding: 5px;
-      border: none;
-      border-radius: 3px;
-      font-family: Century Gothic;
-      background-color: #82aaff;
-      color: white;
-      font-weight: bold;
-      font-size: 14px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: ease-in-out 0.2s;
-    }
-    
-    .btn-submit:hover {
-      background-color: #959dcb;
-    }
-    
-    .btn-submit:active {
-      background-color: #9ab8f7;
-    }
-    h1 {
-      margin-top: 0;
-      font-size: 22px;
-    }
-    </style>
-    `;
+    this.shadow.innerHTML = `<style>${minifyCss(this.css)}</style>`;
     this.pDiv.append(
       this.pDivTitle,
       this.pTitle,
@@ -175,13 +118,82 @@ class PageCreator extends HTMLElement {
       this.pTextDiv,
       this.pSubmit
     );
-    this.pDiv.style.padding = "10px";
-    this.pDiv.style.background = "#292d3e";
-    this.pDiv.style.border = "solid 1px #82aaff";
-    this.pDiv.style.borderRadius = "4px";
-    this.pDiv.style.textAlign = "center";
     this.shadow.append(this.pDiv);
   }
+
+  css: string = `
+  .creator-div {
+      padding: 10px;
+      background: #000f28;
+      border: solid 1px #ba00ad;
+      border-radius: 4px;
+      text-align: center;
+      color: #0abdc6;
+  }
+  .creator-div:hover {
+      background: #001437;
+      border-color: #d300c4;
+  }
+  .color-div {
+    display: flex;
+    flex-direction: row;
+  }
+  h1 {
+    width:100%;
+    text-align:center;
+    margin-top: 0;
+    font-size: 22px;
+    color: #0abdc6;
+    font-weight: normal;
+  }
+  input {
+    margin: 2px;
+    font-size: 14px;
+    font-family: Century Gothic;
+    padding: 5px;
+    border: solid 2px #ba00ad;
+    border-radius: 4px;
+    color: #0abdc6;
+    background: #000b1e;
+    transition: ease-in-out 0.2s;
+  }
+  
+  input:focus {
+    border: solid 2px #d300c4;
+  }
+  .pcr-button {
+    width: 40px;
+    height: 20px;
+    margin: 5px;
+    border: solid #ba00ad 1px;
+    background-color: #42445A;
+  }
+  
+  .btn-submit {
+    width: 100%;
+    margin-top: 4px;
+    padding: 5px;
+    border: solid 1px #d300c4;
+    border-radius: 3px;
+    font-family: Century Gothic;
+    background-color: #000f28;
+    color: #ba00ad;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: ease-in-out 0.2s;
+  }
+  
+  .btn-submit:hover {
+    border-color: #d300c4;
+    color: #d300c4;
+  }
+  
+  .btn-submit:active {
+    background-color: #9ab8f7;
+  }
+  `;
 }
 
 export default PageCreator;
