@@ -823,4 +823,4 @@ function minifyCss(content = "", options = defaultOptions) {
   return content;
 }
 
-export { minifyCss };
+module.exports = { minifyCss };

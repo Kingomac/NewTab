@@ -1,6 +1,6 @@
-import {exec} from 'child_process'
-import fs from 'fs/promises'
-import {minifyCss} from '../modules/uglifycss'
+const { exec } = require('child_process');
+const fs = require('fs/promises');
+const { minifyCss } = require('../modules/uglifycss');
 
 console.log("******** Building ********")
 
@@ -15,7 +15,6 @@ exec("npx webpack -p", (err) => {
 })
 
 const htmlminifier = require('html-minifier')
-const uglifycss = require('uglifycss')
 
 fs.readFile("./public/index.html").then((htmlfile) => {
   const html = htmlminifier.minify(htmlfile.toString('utf-8'), {
@@ -30,9 +29,9 @@ fs.readFile("./public/index.html").then((htmlfile) => {
     removeTagWhitespace: true,
     sortAttributes: true
   });
-  fs.writeFile('./dist/index.html', html).then(() => console.log(' + HTML template --> OK'));
-})
+  fs.writeFile('./dist/index.html', html).then(() => console.log(' + HTML template --> OK')).catch(e => console.log(`Error writing HTML: ${e}`));
+}).catch(e =>  console.log(`Error reading HTML ${e}`));
 fs.readFile("./public/styles.css").then((cssfile) => {
   const css =  minifyCss(cssfile.toString('utf-8'))
-  fs.writeFile('./dist/styles.css', css).then(() => console.log(" + CSS file --> OK"));
-});
+  fs.writeFile('./dist/styles.css', css).then(() => console.log(" + CSS file --> OK")).catch(e => console.log(`Error writing styles ${e}`));
+}).catch(e => console.log(`Error loading the styles: ${e}`));
