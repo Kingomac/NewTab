@@ -4,16 +4,17 @@ import Pickr from "@simonwep/pickr";
 class ColorPicker extends HTMLElement {
   picker: Pickr;
   pickerDiv: HTMLDivElement;
-  constructor() {
+	el:string;
+  constructor(el:string) {
     super();
     this.pickerDiv = document.createElement("div");
     this.pickerDiv.className = "color-picker";
+		this.el = el;
   }
-  connectedCallback() {
+		connectedCallback() {
     this.append(this.pickerDiv);
     this.picker = Pickr.create({
-      el:
-        "#app .col3 .page-creator >> .creator-div .color-div color-picker .color-picker",
+      el:this.el + ' .color-picker',
       theme: "nano",
       autoReposition: true,
       components: {

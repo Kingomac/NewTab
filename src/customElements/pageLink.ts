@@ -1,10 +1,12 @@
 import PageLinkContextMenu from "./pageLinkContextMenu";
 
 class PageLink extends HTMLElement {
+  pageId: number;
   shadow: ShadowRoot;
   showingContextMenu: boolean = false;
-  constructor() {
+  constructor(id: number) {
     super();
+    this.pageId = id;
     this.shadow = this.attachShadow({ mode: "open" });
   }
   connectedCallback() {
@@ -44,7 +46,11 @@ class PageLink extends HTMLElement {
     this.addEventListener("contextmenu", (e) => {
       if (!this.showingContextMenu) {
         this.showingContextMenu = true;
-        const contextMenu = new PageLinkContextMenu(e.clientX, e.clientY);
+        const contextMenu = new PageLinkContextMenu(
+          e.clientX,
+          e.clientY,
+          this.pageId
+        );
         this.shadow.append(contextMenu);
       } else {
         this.showingContextMenu = false;

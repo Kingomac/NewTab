@@ -1,8 +1,9 @@
 import PageLink from "./customElements/pageLink";
-import PageCreator from "./customElements/pageCreator";
+import PageCreatorModal from "./customElements/pageCreatorModal";
 import PageList from "./customElements/pageList";
 import PageLinkContextMenu from "./customElements/pageLinkContextMenu";
 import ColorPicker from "./customElements/colorPicker";
+import PageModifierModal from "./customElements/pageModifierModal";
 
 export default () => {
   const elements = [
@@ -11,8 +12,8 @@ export default () => {
       el: PageLink,
     },
     {
-      tag: "page-creator",
-      el: PageCreator,
+      tag: "page-creator-modal",
+      el: PageCreatorModal,
     },
     {
       tag: "page-list",
@@ -25,6 +26,10 @@ export default () => {
     {
       tag: "color-picker",
       el: ColorPicker,
+    },
+    {
+      tag: "page-modifier-modal",
+      el: PageModifierModal,
     },
   ];
 

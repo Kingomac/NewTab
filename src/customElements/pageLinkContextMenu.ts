@@ -1,10 +1,14 @@
+import { RemovePage } from "../index";
+import PageModifierModal from "./pageModifierModal";
+
 class PageLinkContextMenu extends HTMLElement {
   pageId: number;
   shadow: ShadowRoot;
   x: number;
   y: number;
-  constructor(x: number, y: number) {
+  constructor(x: number, y: number, pageId: number) {
     super();
+    this.pageId = pageId;
     this.shadow = this.attachShadow({ mode: "open" });
     this.x = x;
     this.y = y;
@@ -39,15 +43,21 @@ class PageLinkContextMenu extends HTMLElement {
     </style>
     `;
     const div = document.createElement("div");
-    const el1 = document.createElement("button");
-    const el2 = document.createElement("button");
-    el1.onclick = (e) => {
-      console.log("Click on button 1 from context menu");
+    const btnDelete = document.createElement("button");
+    const btnModify = document.createElement("button");
+
+    btnDelete.innerHTML = "Eliminar";
+    btnDelete.onclick = async () => {
+      await RemovePage(this.pageId);
     };
-    el1.innerHTML = "Modificar";
-    el2.innerHTML = "Eliminar";
-    div.appendChild(el1);
-    div.appendChild(el2);
+    btnModify.innerHTML = "Modificar";
+    btnModify.onclick = async () => {
+      const modal = <PageModifierModal>(
+        document.querySelector("page-modifier-modal")
+      );
+      await modal.ShowModal(this.pageId);
+    };
+    div.append(btnModify, btnDelete);
     div.style.top = `${this.y - div.clientHeight}px`;
     div.style.left = `${this.x - div.clientWidth}px`;
     this.shadow.append(div);
