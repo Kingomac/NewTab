@@ -5,7 +5,12 @@ import PageList from "./customElements/pageList";
 export const app = new AppDatabase();
 
 defineCustomElements();
-const pageList = new PageList();
+export let pageList: PageList;
+
+document.addEventListener("DOMContentLoaded", () => {
+  pageList = <PageList>document.querySelector("page-list");
+});
+
 export async function RemovePage(id: number) {
-    await app.pages.delete(id);
+  await app.pages.delete(id);
 }

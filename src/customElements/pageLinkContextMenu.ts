@@ -1,4 +1,4 @@
-import { RemovePage } from "../index";
+import { RemovePage, pageList } from "../index";
 import PageModifierModal from "./pageModifierModal";
 
 class PageLinkContextMenu extends HTMLElement {
@@ -56,6 +56,7 @@ class PageLinkContextMenu extends HTMLElement {
     btnDelete.innerHTML = "Eliminar";
     btnDelete.onclick = async () => {
       await RemovePage(this.pageId);
+      await pageList.updatePages();
     };
     btnModify.innerHTML = "Modificar";
     btnModify.onclick = async () => {

@@ -1,5 +1,5 @@
 import ColorPicker from "./colorPicker";
-import { app } from "..";
+import { app, pageList } from "..";
 
 class PageModifierModal extends HTMLElement {
   modalFrame: HTMLDivElement;
@@ -77,43 +77,38 @@ class PageModifierModal extends HTMLElement {
     modifyButton.style.width = "100%";
     modifyButton.style.marginTop = "20px";
     modifyButton.onclick = async () => {
-      app.pages
-        .put(
-          {
-            id: this.pageId,
-            title: this.pTitle.value,
-            url: this.pUrl.value,
-            position: this.pPosition.valueAsNumber,
-            bgColor: this.pBgColor.picker
-              .getSelectedColor()
-              .toHEXA()
-              .toString(),
-            bgColorHover: this.pBgHoverColor.picker
-              .getSelectedColor()
-              .toHEXA()
-              .toString(),
-            bgColorActive: this.pBgHoverColor.picker
-              .getSelectedColor()
-              .toHEXA()
-              .toString(),
-            textColor: this.pTextColor.picker
-              .getSelectedColor()
-              .toHEXA()
-              .toString(),
-            textColorHover: this.pTextHoverColor.picker
-              .getSelectedColor()
-              .toHEXA()
-              .toString(),
-            textColorActive: this.pTextActiveColor.picker
-              .getSelectedColor()
-              .toHEXA()
-              .toString(),
-          },
-          this.pageId
-        )
-        .then((e) => {
-          this.modalFrame.style.display = "none";
-        });
+      const result = await app.pages.put(
+        {
+          id: this.pageId,
+          title: this.pTitle.value,
+          url: this.pUrl.value,
+          position: this.pPosition.valueAsNumber,
+          bgColor: this.pBgColor.picker.getSelectedColor().toHEXA().toString(),
+          bgColorHover: this.pBgHoverColor.picker
+            .getSelectedColor()
+            .toHEXA()
+            .toString(),
+          bgColorActive: this.pBgHoverColor.picker
+            .getSelectedColor()
+            .toHEXA()
+            .toString(),
+          textColor: this.pTextColor.picker
+            .getSelectedColor()
+            .toHEXA()
+            .toString(),
+          textColorHover: this.pTextHoverColor.picker
+            .getSelectedColor()
+            .toHEXA()
+            .toString(),
+          textColorActive: this.pTextActiveColor.picker
+            .getSelectedColor()
+            .toHEXA()
+            .toString(),
+        },
+        this.pageId
+      );
+      this.modalFrame.style.display = "none";
+      await pageList.updatePages();
     };
     cancelButton.className = "modal-cancel-btn";
     cancelButton.style.width = "100%";

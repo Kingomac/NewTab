@@ -56,7 +56,6 @@ class PageLink extends HTMLElement {
         this.showingContextMenu = false;
         this.shadow.querySelector("page-link-context-menu").remove();
       }
-      console.log("ajjajja what the fuck do you think you are doing");
       e.preventDefault();
     });
     this.addEventListener("click", () => {
