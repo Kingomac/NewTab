@@ -19,26 +19,33 @@ class PageLinkContextMenu extends HTMLElement {
     div {
       display: flex;
       flex-direction: column;
-      padding: 3px;
       position: absolute;
-      background-color: white;
-      border-radious: 5px;
-      border: none; 
+      border-radius: 5px;
+      border: solid 3px #711C91;
+			transition: ease-in-out .2s;
     }
+		div:hover {
+				border-color: #D300C4;
+		}
     button {
       cursor: pointer;
-      border: none;
+			color: #0ABDC6;
+			font-family: Century Gothic;
+			text-transform: uppercase;
+			font-weight: bold;
       width: 100%;
-      height:100%;
-      color: red;
-      background-color: white;
-      padding: 7px;
+      height: 100%;
+      color: #0ABDC6;
+      background-color: #000B1E;
+      padding: 10px;
+			border: none;
+			transition: ease-in-out .2s;
     }
     button:hover {
-      background-color: gainsboro;
+      background-color: #1c61c2;
     }
     button:active {
-      background-color: whitesmoke;
+      background-color: #000B1E;
     }
     </style>
     `;
